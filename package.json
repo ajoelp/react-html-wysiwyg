@@ -1,6 +1,6 @@
 {
   "name": "@ajoelp/react-html-wysiwyg",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Rich text editor for react build with DraftJS",
   "main": "build/index.js",
   "module": "build/index.es.js",
