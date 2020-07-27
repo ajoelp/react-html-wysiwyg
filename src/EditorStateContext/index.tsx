@@ -1,6 +1,6 @@
 import { CompositeDecorator, ContentState, convertToRaw, Editor, EditorState } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
+import htmlToDraftjs from 'html-to-draftjs';
 import React, { createContext, RefObject, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import decorators from '../Decorators';
 import { ReactHtmlEditorProps } from '../ReactHtmlWysisyg';
@@ -57,7 +57,7 @@ export default function EditorStateProvider(props: EditorStateProviderProps): JS
     }, [ref]);
 
     useEffect(() => {
-        const contentBlock = htmlToDraft(value);
+        const contentBlock = htmlToDraftjs.default ? htmlToDraftjs.default(value) : htmlToDraftjs(value);
         if (contentBlock) {
             const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
             const editorState = EditorState.createWithContent(contentState, compositeDecorator);

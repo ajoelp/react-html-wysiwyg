@@ -3,7 +3,14 @@ import { render } from 'react-dom';
 import { Editor } from '../build';
 
 const App = () => {
-    return <Editor />;
+    const [value, setValue] = React.useState('');
+
+    return (
+        <div>
+            <Editor value={value} onChange={setValue} editorClassName="prose" />
+            <pre>{value}</pre>
+        </div>
+    );
 };
 
 render(<App />, document.getElementById('app'));
