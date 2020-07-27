@@ -8,7 +8,7 @@ interface ToolbarProps {
     controls?: ControlsList[];
 }
 
-const DEFAULT_CONTROLS: ControlsList[] = ['formatting', 'blocktype', 'alignment', 'link', 'upload'];
+const DEFAULT_CONTROLS: ControlsList[] = ['formatting', 'blocktype', 'lists', 'alignment', 'link', 'upload'];
 
 export default function Toolbar(props: ToolbarProps): JSX.Element {
     const { controls = DEFAULT_CONTROLS } = props;
