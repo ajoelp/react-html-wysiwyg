@@ -1,7 +1,7 @@
 {
   "name": "@ajoelp/react-html-wysiwyg",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Rich text editor for react build with DraftJS",
   "main": "build/index.js",
   "module": "build/index.es.js",
   "files": [
@@ -17,8 +17,23 @@
     "test:watch": "jest --watch",
     "example": "parcel example/index.html"
   },
-  "author": "",
-  "license": "ISC",
+  "homepage": "https://github.com/ajoelp/react-html-wysiwyg#readme",
+  "author": "Joel Podrebarac <joelpodrebar@gmail.com>",
+  "license": "MIT",
+  "repository": {
+		"type": "git",
+		"url": "https://github.com/ajoelp/react-html-wysiwyg.git"
+	},
+  "bugs": {
+    "url": "https://github.com/ajoelp/react-html-wysiwyg/issues"
+  },
+  "keywords": [
+    "html",
+    "react",
+    "wysisyg",
+    "draft",
+    "draftjs"
+  ],
   "devDependencies": {
     "@babel/core": "^7.10.5",
     "@rollup/plugin-commonjs": "^14.0.0",
