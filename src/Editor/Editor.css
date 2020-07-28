@@ -1,0 +1,29 @@
+.DraftEditor-root{
+    min-height: 300px;
+    width: 100%;
+}
+
+.DraftEditor-editorContainer{
+    height: 100%;
+    width: 100%;
+}
+
+
+.editor-text-left {
+    text-align: left !important;
+}
+.editor-text-right {
+    text-align: right !important;
+}
+.editor-text-center {
+    text-align: center !important;
+}
+.editor-text-justify {
+    text-align: justify !important;
+}
+
+
+.editor-text-left > *, .editor-text-right > *, .editor-text-center > *, .editor-text-justify > * {
+    display: inline-block;
+    text-align: inherit !important;
+}
