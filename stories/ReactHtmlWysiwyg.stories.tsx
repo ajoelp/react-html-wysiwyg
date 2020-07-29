@@ -19,10 +19,10 @@ export const Main: FC = () => {
       'https://images.unsplash.com/photo-1595326928396-247ffcf81da8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3300&q=80'
     );
 
-  return <Editor {...{ value, onChange, editorClassName, onFileUpload }} />;
+  return <Editor height={600} {...{ value, onChange, editorClassName, onFileUpload }} />;
 };
 
 export const ExistingHTML: FC = () => {
   const [value, onChange] = useState(existingHtml.default);
-  return <Editor {...{ value, onChange, editorClassName }} />;
+  return <Editor height={600} {...{ value, onChange, editorClassName }} />;
 };

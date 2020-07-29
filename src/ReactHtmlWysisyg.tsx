@@ -2,6 +2,7 @@ import React from 'react';
 import Editor from './Editor';
 import EditorStateProvider from './EditorStateContext';
 import Toolbar from './Toolbar';
+import DialogManager from './DialogManager';
 
 export interface ReactHtmlEditorProps {
   value?: string;
@@ -9,6 +10,7 @@ export interface ReactHtmlEditorProps {
   onFileUpload?(file: File): Promise<string>;
   toolbarHidden?: boolean;
   editorClassName?: string;
+  height?: number;
 }
 
 export default function ReactHtmlEditor(props: ReactHtmlEditorProps): JSX.Element {
@@ -16,10 +18,12 @@ export default function ReactHtmlEditor(props: ReactHtmlEditorProps): JSX.Elemen
   const { editorClassName, value = '', onChange = () => {}, toolbarHidden = false } = props;
   return (
     <EditorStateProvider value={value} onValueChange={onChange} config={props}>
-      <div className="rounded border relative p-2">
-        {!toolbarHidden && <Toolbar />}
-        <Editor className={editorClassName} />
-      </div>
+      <DialogManager>
+        <div className="rounded border relative p-2">
+          {!toolbarHidden && <Toolbar />}
+          <Editor className={editorClassName} />
+        </div>
+      </DialogManager>
     </EditorStateProvider>
   );
 }

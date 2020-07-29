@@ -19,7 +19,7 @@ export default function Toolbar(props: ToolbarProps): JSX.Element {
   };
 
   return (
-    <div className="flex items-center border-b px-2 bg-white sticky top-0 z-50 mb-2 py-2" onMouseDown={preventDefault}>
+    <div className="flex items-center border-b px-2 bg-white mb-2 pb-2" onMouseDown={preventDefault}>
       {controls.map(controlName => {
         const Control = Controls[controlName];
         return <Control key={controlName} editorState={editorState} onChange={onChange} />;

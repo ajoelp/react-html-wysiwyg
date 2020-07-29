@@ -1,7 +1,6 @@
 import { ContentState } from 'draft-js';
-import React from 'react';
-import { useUpdateEntityData } from '../utils/useUpdateBlockEntityData';
-import Popover from '../components/Popover';
+import React, { useEffect } from 'react';
+import { useDialog } from '../DialogManager';
 
 interface LinkProps {
   entityKey: string;
@@ -11,34 +10,23 @@ interface LinkProps {
 
 export default function Link(props: LinkProps): JSX.Element {
   const { entityKey, contentState, children } = props;
-  const { updateBlockEntityData } = useUpdateEntityData(entityKey, contentState);
   const { url, targetOption, startOpen } = contentState.getEntity(entityKey).getData();
+  const { openDialog } = useDialog();
+
+  const open = () => {
+    openDialog('link', { entityKey, contentState });
+  };
+
+  useEffect(() => {
+    if (startOpen) {
+      open();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <Popover
-      visible={startOpen}
-      render={() => (
-        <div>
-          <p className="text-sm uppercase text-gray-600 mb-1">URL</p>
-          <input
-            type="text"
-            className="border px-3 py-1 w-full rounded"
-            value={url}
-            onChange={updateBlockEntityData('url')}
-          />
-          <p className="text-sm uppercase text-gray-600 mb-1">Target</p>
-          <input
-            type="text"
-            className="border px-3 py-1 w-full rounded"
-            value={targetOption}
-            onChange={updateBlockEntityData('targetOption')}
-          />
-        </div>
-      )}
-    >
-      <a href={url} target={targetOption}>
-        {children}
-      </a>
-    </Popover>
+    <a href={url} target={targetOption} onMouseDown={open}>
+      {children}
+    </a>
   );
 }

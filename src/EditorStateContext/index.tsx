@@ -1,4 +1,4 @@
-import { CompositeDecorator, ContentState, convertToRaw, Editor, EditorState } from 'draft-js';
+import { CompositeDecorator, ContentState, convertToRaw, EditorState } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraftjs from 'html-to-draftjs';
 import React, { createContext, RefObject, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
@@ -13,7 +13,7 @@ interface EditorStateContext {
   focus(): void;
   onChange(newState: EditorState): void;
   setReadOnly(value: boolean): void;
-  ref?: RefObject<Editor> | null;
+  ref?: RefObject<HTMLDivElement> | null;
 }
 
 const EditorStateContext = createContext<EditorStateContext>({
@@ -48,7 +48,7 @@ export default function EditorStateProvider(props: EditorStateProviderProps): JS
   const compositeDecorator = useMemo(() => new CompositeDecorator(decorators), []);
   const [editorState, setEditorState] = useState(EditorState.createEmpty(compositeDecorator));
   const [readOnly, setReadOnly] = useState(false);
-  const ref = useRef<Editor>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   const focus = useCallback(() => {
     if (ref.current) {

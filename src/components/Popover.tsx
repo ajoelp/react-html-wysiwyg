@@ -14,6 +14,7 @@ export default function Popover({ children, render, visible: startOpen }: Popove
   const scale = useSpring(initialScale, springConfig);
   const { setReadOnly } = useEditorState();
   const [visible, setVisible] = useState(startOpen);
+  const { ref: editorRef } = useEditorState();
   const ref = useClickOutside<HTMLDivElement>(() => {
     setVisible(false);
   });
@@ -45,7 +46,7 @@ export default function Popover({ children, render, visible: startOpen }: Popove
     <Tippy
       visible={visible}
       animation={true}
-      appendTo={document.body}
+      appendTo={editorRef?.current || document.body}
       onMount={onMount}
       onHide={onHide}
       interactive={true}
