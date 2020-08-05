@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import defaultTheme from '../themes/defaultTheme';
-import JsonObject from 'types/JsonObject';
+import JsonObject from '../types/JsonObject';
 
 interface ThemeManagerProps {
   theme?: JsonObject;
