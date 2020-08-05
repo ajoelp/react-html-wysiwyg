@@ -1,6 +1,6 @@
 {
   "name": "@ajoelp/react-html-wysiwyg",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Rich text editor for react build with DraftJS",
   "license": "MIT",
   "repository": {
