@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
 import { Editor } from '../src';
+import styled from 'styled-components';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const existingHtml = require('raw-loader!../src/existing-html.html');
@@ -25,4 +26,21 @@ export const Main: FC = () => {
 export const ExistingHTML: FC = () => {
   const [value, onChange] = useState(existingHtml.default);
   return <Editor height={600} {...{ value, onChange, editorClassName }} />;
+};
+
+const EditorWrapper = styled.div`
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
+  h1 {
+    background: blue;
+  }
+
+  p {
+    background: aqua;
+  }
+`;
+
+export const WrappingContainer: FC = () => {
+  const [value, onChange] = useState(existingHtml.default);
+  return <Editor height={600} {...{ value, onChange, editorClassName }} editorWrapper={EditorWrapper} />;
 };

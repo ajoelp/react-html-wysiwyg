@@ -1,6 +1,9 @@
 import React from 'react';
 import * as Controls from '../Controls';
 import { useEditorState } from '../EditorStateContext';
+import styled from 'styled-components';
+import { Box } from '../components/Layout';
+import getThemeValue from '../utils/getThemeValue';
 
 type ControlsList = keyof typeof Controls;
 
@@ -9,6 +12,16 @@ interface ToolbarProps {
 }
 
 const DEFAULT_CONTROLS: ControlsList[] = ['formatting', 'blocktype', 'lists', 'alignment', 'link', 'upload'];
+
+const ToolbarWrapper = styled(Box)`
+  ${getThemeValue('base')};
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid ${getThemeValue('colors.borderColor')};
+  background: white;
+  margin-bottom: 1em;
+  padding-bottom: 0.5em;
+`;
 
 export default function Toolbar(props: ToolbarProps): JSX.Element {
   const { controls = DEFAULT_CONTROLS } = props;
@@ -19,11 +32,11 @@ export default function Toolbar(props: ToolbarProps): JSX.Element {
   };
 
   return (
-    <div className="flex items-center border-b px-2 bg-white mb-2 pb-2" onMouseDown={preventDefault}>
+    <ToolbarWrapper onMouseDown={preventDefault}>
       {controls.map(controlName => {
         const Control = Controls[controlName];
         return <Control key={controlName} editorState={editorState} onChange={onChange} />;
       })}
-    </div>
+    </ToolbarWrapper>
   );
 }

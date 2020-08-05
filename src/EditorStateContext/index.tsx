@@ -63,6 +63,7 @@ export default function EditorStateProvider(props: EditorStateProviderProps): JS
       const editorState = EditorState.createWithContent(contentState, compositeDecorator);
       setEditorState(editorState);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onChange = (editorState: EditorState) => {

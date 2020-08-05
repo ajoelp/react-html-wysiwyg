@@ -9,5 +9,6 @@ export default function useChangedEditorState(callback: EffectCallback) {
     if (editorState !== previousEditorState) {
       callback();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editorState]);
 }

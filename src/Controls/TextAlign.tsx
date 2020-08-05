@@ -7,6 +7,7 @@ import SvgAlignJustify from '../components/icons/AlignJustify';
 import SvgAlignLeft from '../components/icons/AlignLeft';
 import SvgAlignRight from '../components/icons/AlignRight';
 import useChangedEditorState from '../utils/useChangedEditorState';
+import { Box } from '../components/Layout';
 
 interface TextAlignProps {
   onChange(editorState: EditorState): void;
@@ -39,17 +40,17 @@ export default function TextAlign(props: TextAlignProps): JSX.Element {
   };
 
   return (
-    <div className="inline-flex items-center">
+    <Box display="inline-flex" alignItems="center">
       {ALIGNMENT_OPTIONS.map(format => (
         <IconButton
           data-testid={`button-${format.format}`}
           key={format.format}
-          className={`mr-1 ${currentAlignment === format.format ? 'text-indigo-500' : ''}`}
+          active={currentAlignment === format.format}
           onClick={toggleAlignment(format.format)}
         >
           <format.icon />
         </IconButton>
       ))}
-    </div>
+    </Box>
   );
 }

@@ -1,12 +1,22 @@
 import React from 'react';
+import styled from 'styled-components';
 
-type ButtonProps = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
+const ToolbarButtonWrapper = styled.button`
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+`;
 
-export default function ToolbarButton({ onClick, ...rest }: ButtonProps): JSX.Element {
+type ButtonProps = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> & {
+  active?: boolean;
+};
+
+export default function ToolbarButton({ onClick, ref: _ref, ...rest }: ButtonProps): JSX.Element {
   const click = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     onClick && onClick(e);
   };
 
-  return <button onClick={click} {...rest} />;
+  return <ToolbarButtonWrapper onClick={click} {...rest} />;
 }

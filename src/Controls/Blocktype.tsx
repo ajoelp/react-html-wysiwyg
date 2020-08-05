@@ -3,6 +3,8 @@ import { getSelectedBlocksType } from 'draftjs-utils';
 import React, { FormEvent, useState } from 'react';
 import { Dropdown, DropdownButton, DropdownMenu, DropdownTrigger } from '../components/Dropdown';
 import useChangedEditorState from '../utils/useChangedEditorState';
+import styled from 'styled-components';
+import getThemeValue from '../utils/getThemeValue';
 
 interface BlockTypeProps {
   onChange(editorState: EditorState): void;
@@ -20,6 +22,33 @@ export const BLOCK_TYPES = [
   { label: 'Blockquote', type: 'blockquote' },
   { label: 'Code', type: 'code' },
 ];
+
+const BlockTypeButton = styled(DropdownButton)`
+  display: block;
+  width: 100%;
+  padding: 1em 0.5em;
+  text-align: left;
+  &:hover {
+    cursor: pointer;
+    background-color: ${getThemeValue('colors.primary')};
+  }
+`;
+
+const BlockTypeTrigger = styled(DropdownTrigger)`
+  height: 30px;
+  width: auto;
+  border: 1px solid ${getThemeValue('colors.borderColor')};
+  border-radius: ${getThemeValue('rounding')};
+  padding: 0.5em;
+  margin-right: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    background-color: ${getThemeValue('colors.primary')};
+    cursor: pointer;
+  }
+`;
 
 export default function BlockType(props: BlockTypeProps): JSX.Element {
   const { editorState, onChange } = props;
@@ -41,18 +70,17 @@ export default function BlockType(props: BlockTypeProps): JSX.Element {
 
   return (
     <Dropdown>
-      <DropdownTrigger>{selectedBlock?.label ?? '-'}</DropdownTrigger>
+      <BlockTypeTrigger>{selectedBlock?.label ?? '-'}</BlockTypeTrigger>
       <DropdownMenu>
         {BLOCK_TYPES.map(blockType => {
           return (
-            <DropdownButton
+            <BlockTypeButton
               data-testid={`button-${blockType.type}`}
               key={blockType.type}
-              className="block w-full px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white text-left"
               onClick={selectBlockType(blockType.type)}
             >
               {blockType.label}
-            </DropdownButton>
+            </BlockTypeButton>
           );
         })}
       </DropdownMenu>

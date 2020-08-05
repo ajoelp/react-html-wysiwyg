@@ -6,6 +6,7 @@ import SvgBold from '../components/icons/Bold';
 import SvgItalic from '../components/icons/Italic';
 import SvgUnderline from '../components/icons/Underline';
 import useChangedEditorState from '../utils/useChangedEditorState';
+import { Box } from '../components/Layout';
 
 interface FormattingProps {
   onChange(editorState: EditorState): void;
@@ -34,17 +35,17 @@ export default function Formatting(props: FormattingProps): JSX.Element {
   };
 
   return (
-    <div className="inline-flex items-center text-gray-800">
+    <Box display="inline-flex" alignItems="center">
       {FORMATTING_OPTIONS.map(format => (
         <IconButton
           data-testid={`button-${format.format.toLowerCase()}`}
           key={format.format}
-          className={`mr-1 ${!!currentFormats[format.format] ? 'text-indigo-500' : ''}`}
+          active={!!currentFormats[format.format]}
           onClick={toggleInlineStyle(format.format)}
         >
           <format.icon />
         </IconButton>
       ))}
-    </div>
+    </Box>
   );
 }

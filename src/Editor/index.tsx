@@ -7,16 +7,21 @@ import { useEditorState } from '../EditorStateContext';
 import useHandleKeyCommand from '../utils/useHandleKeyCommand';
 import blockStyleFunction from '../utils/blockStyleFunction';
 import blockRenderFunction from '../utils/blockRenderFunction';
+import styled from 'styled-components';
 
 interface EditorProps {
   placeholder?: string;
   className?: string;
 }
 
+const EditorWrapperComponent = styled.div``;
+
 export default function Editor(props: EditorProps): JSX.Element {
   const { placeholder = 'Type Here', className } = props;
   const { editorState, onChange, readOnly, ref, focus, config } = useEditorState();
   const handleKeyCommand = useHandleKeyCommand();
+
+  const EditorWrapper = config.editorWrapper ?? EditorWrapperComponent;
 
   return (
     <div data-testid="editor" onClick={focus}>
@@ -26,7 +31,7 @@ export default function Editor(props: EditorProps): JSX.Element {
         autoHeightMin={config.height ?? 300}
         autoHeightMax={config.height ?? 300}
       >
-        <div className={className} ref={ref}>
+        <EditorWrapper className={className} ref={ref}>
           <DraftEditor
             placeholder={placeholder}
             editorState={editorState}
@@ -36,7 +41,7 @@ export default function Editor(props: EditorProps): JSX.Element {
             readOnly={readOnly}
             blockRendererFn={blockRenderFunction(editorState)}
           />
-        </div>
+        </EditorWrapper>
       </Scrollbars>
     </div>
   );

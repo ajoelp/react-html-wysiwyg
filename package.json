@@ -55,9 +55,12 @@
     "@storybook/react": "^5.3.19",
     "@testing-library/react": "^10.4.7",
     "@types/draft-js": "^0.10.43",
+    "@types/lodash": "^4.14.158",
     "@types/react": "^16.9.43",
     "@types/react-custom-scrollbars": "^4.0.6",
     "@types/react-dom": "^16.9.8",
+    "@types/styled-components": "^5.1.2",
+    "@types/styled-system": "^5.1.10",
     "autoprefixer": "^9.8.5",
     "babel-loader": "^8.1.0",
     "cssnano": "^4.1.10",
@@ -76,15 +79,17 @@
   },
   "dependencies": {
     "@reach/dialog": "^0.10.5",
-    "@tippyjs/react": "^4.1.0",
     "draft-js": "^0.11.6",
     "draftjs-to-html": "^0.9.1",
     "draftjs-utils": "^0.10.2",
     "framer-motion": "^2.2.0",
     "html-to-draftjs": "^1.5.0",
-    "immutable": "^4.0.0-rc.12",
+    "immutable": "^3.8.2",
+    "lodash": "^4.17.19",
+    "polished": "^3.6.5",
     "react-custom-scrollbars": "^4.2.1",
     "react-dropzone": "^11.0.2",
-    "tippy.js": "^6.2.5"
+    "styled-components": "^5.1.1",
+    "styled-system": "^5.1.5"
   }
 }
