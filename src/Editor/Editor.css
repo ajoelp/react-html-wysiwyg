@@ -8,7 +8,6 @@
     width: 100%;
 }
 
-
 .editor-text-left {
     text-align: left !important;
 }
@@ -21,7 +20,6 @@
 .editor-text-justify {
     text-align: justify !important;
 }
-
 
 .editor-text-left > *, .editor-text-right > *, .editor-text-center > *, .editor-text-justify > * {
     display: inline-block;

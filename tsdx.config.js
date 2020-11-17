@@ -18,6 +18,7 @@ module.exports = {
         extract: !!options.writeMeta,
       })
     );
+    console.log(config.output);
     return config;
   },
 };
