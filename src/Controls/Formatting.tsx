@@ -35,7 +35,7 @@ export default function Formatting(props: FormattingProps): JSX.Element {
 
   return (
     <div className="inline-flex items-center text-gray-800">
-      {FORMATTING_OPTIONS.map(format => (
+      {FORMATTING_OPTIONS.map((format) => (
         <IconButton
           data-testid={`button-${format.format.toLowerCase()}`}
           key={format.format}

@@ -1,8 +1,8 @@
-import { AnimatePresence, motion } from 'framer-motion';
 import React, { createContext, ReactElement, useContext } from 'react';
 import { useClickOutside } from '../utils/useClickOutside';
 import { IconButton } from './IconButton';
 import ToolbarButton from './ToolbarButton';
+import { Transition } from '@headlessui/react';
 
 const DropdownContext = createContext<{ open: boolean; setOpen(value: boolean): void }>({
   open: false,
@@ -36,19 +36,22 @@ export const DropdownTrigger: React.FC<{ noArrow?: boolean }> = ({ children, noA
 export const DropdownMenu: React.FC<{ placement?: 'left' | 'right' }> = ({ children, placement = 'left' }) => {
   const { open } = useContext(DropdownContext);
   return (
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          initial={{ opacity: 0, marginTop: -10 }}
-          animate={{ opacity: 1, marginTop: 0 }}
-          exit={{ opacity: 0, marginTop: 10 }}
-          transition={{ duration: 0.1 }}
-          className={`absolute bg-white w-56 z-30 shadow-xl rounded border border-gray-3 ${placement}-0 overflow-hidden mt-2`}
-        >
-          {children}
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <Transition
+      appear={true}
+      show={open}
+      enter="transition-opacity duration-75"
+      enterFrom="opacity-0"
+      enterTo="opacity-100"
+      leave="transition-opacity duration-150"
+      leaveFrom="opacity-100"
+      leaveTo="opacity-0"
+    >
+      <div
+        className={`absolute bg-white w-56 z-30 shadow-xl rounded border border-gray-3 ${placement}-0 overflow-hidden mt-2`}
+      >
+        {children}
+      </div>
+    </Transition>
   );
 };
 
