@@ -16,13 +16,14 @@ export default function EmbeddedLink(props: EmbeddedLinkProps): JSX.Element {
     <div
       className="relative"
       style={{ textAlign }}
-      onMouseDown={e => {
+      onMouseDown={(e) => {
         e.preventDefault();
         openDialog('embed', { contentState, block, entity });
       }}
     >
       <div className="inline-block pointer-events-none">
         <iframe
+          title={src}
           width={width}
           height={height}
           src={src}

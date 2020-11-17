@@ -20,7 +20,7 @@ export default function Toolbar(props: ToolbarProps): JSX.Element {
 
   return (
     <div className="flex items-center border-b px-2 bg-white mb-2 pb-2" onMouseDown={preventDefault}>
-      {controls.map(controlName => {
+      {controls.map((controlName) => {
         const Control = Controls[controlName];
         return <Control key={controlName} editorState={editorState} onChange={onChange} />;
       })}

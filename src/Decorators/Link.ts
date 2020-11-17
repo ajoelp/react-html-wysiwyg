@@ -6,7 +6,7 @@ const linkStrategy = (
   callback: (...args: any) => void,
   contentState: ContentState
 ): void => {
-  contentBlock.findEntityRanges(character => {
+  contentBlock.findEntityRanges((character) => {
     const entityKey = character.getEntity();
     return entityKey !== null && contentState.getEntity(entityKey).getType() === 'LINK';
   }, callback);

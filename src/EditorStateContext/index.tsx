@@ -63,7 +63,7 @@ export default function EditorStateProvider(props: EditorStateProviderProps): JS
       const editorState = EditorState.createWithContent(contentState, compositeDecorator);
       setEditorState(editorState);
     }
-  }, []);
+  }, [compositeDecorator, value]);
 
   const onChange = (editorState: EditorState) => {
     setEditorState(editorState);

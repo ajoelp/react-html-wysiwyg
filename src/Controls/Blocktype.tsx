@@ -1,12 +1,12 @@
 import { EditorState, RichUtils } from 'draft-js';
 import { getSelectedBlocksType } from 'draftjs-utils';
-import React, { FormEvent, useState } from 'react';
-import { Dropdown, DropdownButton, DropdownMenu, DropdownTrigger } from '../components/Dropdown';
+import React, { useState } from 'react';
 import useChangedEditorState from '../utils/useChangedEditorState';
 import { Listbox, Transition } from '@headlessui/react';
 
 interface BlockTypeProps {
   onChange(editorState: EditorState): void;
+
   editorState: EditorState;
 }
 
@@ -112,25 +112,5 @@ export default function BlockType(props: BlockTypeProps): JSX.Element {
         </>
       )}
     </Listbox>
-  );
-
-  return (
-    <Dropdown>
-      <DropdownTrigger>{selectedBlock?.label ?? '-'}</DropdownTrigger>
-      <DropdownMenu>
-        {BLOCK_TYPES.map((blockType) => {
-          return (
-            <DropdownButton
-              data-testid={`button-${blockType.type}`}
-              key={blockType.type}
-              className="block w-full px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white text-left"
-              onClick={selectBlockType(blockType.type)}
-            >
-              {blockType.label}
-            </DropdownButton>
-          );
-        })}
-      </DropdownMenu>
-    </Dropdown>
   );
 }

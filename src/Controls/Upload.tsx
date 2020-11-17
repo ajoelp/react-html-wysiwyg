@@ -21,66 +21,72 @@ export default function Upload(props: UploadProps): JSX.Element {
   const { config } = useEditorState();
   const [, setError] = useState<string>();
 
-  const appendFile = (url: string, file: File) => {
-    const selection = editorState.getSelection();
+  const appendFile = useCallback(
+    (url: string, file: File) => {
+      const selection = editorState.getSelection();
 
-    const data = {
-      url,
-      targetOption: '_blank',
-    };
+      const data = {
+        url,
+        targetOption: '_blank',
+      };
 
-    const entityKey = editorState
-      .getCurrentContent()
-      .createEntity('LINK', 'MUTABLE', data)
-      .getLastCreatedEntityKey();
+      const entityKey = editorState.getCurrentContent().createEntity('LINK', 'MUTABLE', data).getLastCreatedEntityKey();
 
-    const contentState = Modifier.replaceText(
-      editorState.getCurrentContent(),
-      selection,
-      `${file.name}`,
-      editorState.getCurrentInlineStyle(),
-      entityKey
-    );
+      const contentState = Modifier.replaceText(
+        editorState.getCurrentContent(),
+        selection,
+        `${file.name}`,
+        editorState.getCurrentInlineStyle(),
+        entityKey
+      );
 
-    const newState = EditorState.push(editorState, contentState, 'insert-characters');
+      const newState = EditorState.push(editorState, contentState, 'insert-characters');
 
-    onChange(newState);
-  };
+      onChange(newState);
+    },
+    [editorState, onChange]
+  );
 
-  const appendImage = (src: string) => {
-    const data = {
-      src,
-      width: '100%',
-      height: 'auto',
-    };
+  const appendImage = useCallback(
+    (src: string) => {
+      const data = {
+        src,
+        width: '100%',
+        height: 'auto',
+      };
 
-    const entityKey = editorState
-      .getCurrentContent()
-      .createEntity('IMAGE', 'MUTABLE', data)
-      .getLastCreatedEntityKey();
+      const entityKey = editorState
+        .getCurrentContent()
+        .createEntity('IMAGE', 'MUTABLE', data)
+        .getLastCreatedEntityKey();
 
-    const newState = AtomicBlockUtils.insertAtomicBlock(editorState, entityKey, ' ');
+      const newState = AtomicBlockUtils.insertAtomicBlock(editorState, entityKey, ' ');
 
-    onChange(newState);
-  };
+      onChange(newState);
+    },
+    [editorState, onChange]
+  );
 
-  const onDrop = useCallback(async (files: File[]) => {
-    if (config.onFileUpload && files.length) {
-      try {
-        const file = files[0];
-        const path = await config.onFileUpload(file);
-        setToggle(false);
-        if (isFileImage(file)) {
-          appendImage(path);
-        } else {
-          appendFile(path, file);
+  const onDrop = useCallback(
+    async (files: File[]) => {
+      if (config.onFileUpload && files.length) {
+        try {
+          const file = files[0];
+          const path = await config.onFileUpload(file);
+          setToggle(false);
+          if (isFileImage(file)) {
+            appendImage(path);
+          } else {
+            appendFile(path, file);
+          }
+          setToggle(false);
+        } catch (e) {
+          setError(e.message ?? 'An error occurred.');
         }
-        setToggle(false);
-      } catch (e) {
-        setError(e.message ?? 'An error occurred.');
       }
-    }
-  }, []);
+    },
+    [appendFile, appendImage, config]
+  );
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop, multiple: false });
 

@@ -40,7 +40,7 @@ export default function TextAlign(props: TextAlignProps): JSX.Element {
 
   return (
     <div className="inline-flex items-center">
-      {ALIGNMENT_OPTIONS.map(format => (
+      {ALIGNMENT_OPTIONS.map((format) => (
         <IconButton
           data-testid={`button-${format.format}`}
           key={format.format}

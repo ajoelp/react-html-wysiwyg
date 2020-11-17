@@ -26,7 +26,7 @@ export default function Popover({ children, render, visible: startOpen }: Popove
   }
 
   function onHide({ unmount }: Instance<any>) {
-    const cleanup = scale.onChange(value => {
+    const cleanup = scale.onChange((value) => {
       if (value <= initialScale) {
         cleanup();
         unmount();

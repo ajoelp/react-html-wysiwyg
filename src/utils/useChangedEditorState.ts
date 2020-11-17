@@ -9,5 +9,5 @@ export default function useChangedEditorState(callback: EffectCallback) {
     if (editorState !== previousEditorState) {
       callback();
     }
-  }, [editorState]);
+  }, [callback, editorState, previousEditorState]);
 }

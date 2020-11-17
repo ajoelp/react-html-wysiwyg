@@ -27,7 +27,7 @@ export default function Lists(props: ListsProps): JSX.Element {
 
   return (
     <>
-      {BLOCK_TYPES.map(blockType => {
+      {BLOCK_TYPES.map((blockType) => {
         return (
           <IconButton
             data-testid={`button-${blockType.type}`}
